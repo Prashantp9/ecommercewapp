@@ -1,36 +1,136 @@
 import styled from "styled-components"
 import ProductItems from "./ProductItems"
 import Filter from "./Filter"
-// import { useDispatch, useSelector } from "react-redux"
 import { useEffect,useContext} from "react"
-// import { setProducts } from "../redux/actions/productActions"
 import notecontext from "../context/productcontext"
+import Filterf from "./Filterf"
+//filter imports
+import "./filterf.css"
+import { useState } from 'react'
+import { useDispatch } from "react-redux";
+import { filteredproduct } from "../Redux/filter"
 
 
 const Container = styled.div`
- display: flex;
- flex-wrap: wrap;
- padding: 10px;
+ margin-left: 1.5rem;
+ display: grid;
+ grid-template-columns: 1fr 1fr 1fr 1fr 1fr  ;
+ grid-column-gap: 1rem;
  `
 
 
 
 const Productlist = styled.div`
-  display: flex;`
+  display: flex;
+  flex-direction: column;
+  `
 
 
 const ProductsPage = () => {
- 
   const context = useContext(notecontext);
   const { fetchProduct, products }=context;
   useEffect(() => {
     fetchProduct();
   }, [])
-  console.log("products:", products)
+
+
+
+  //filterpage js
+  const dispatch = useDispatch()
+	const [filter, setfilter] = useState({})
+	
+	
+	const AddFilter =()=>{
+		console.log(filter)
+		dispatch(filteredproduct({...filter}))
+	}   
+	
+	const handleFilter = (e)=>{
+		const value = e.target.value;
+		setfilter({
+			[e.target.name] : value,
+		})
+	}
+    
+	
+	AddFilter();
+
+  const FCategories = []
+	const FilterCategories = ()=>{
+		
+		for(let i=0;i < products.length; i++){
+			let producta = products[i].categories
+			for(let j=0;j < producta.length; j++){
+				FCategories.push(producta[j])
+			}
+		}
+	}
+	products && FilterCategories()
+	function removeDuplicates(arr) {
+        return arr.filter((item,
+            index) => arr.indexOf(item) === index);
+    }
+	const farray = removeDuplicates(FCategories)
+  //end
+  const filtered_array = products.filter(filteredarray)
+ const filteredarray =(obj)=>{
+    const cat = obj.categories
+    for (let index = 0; index < cat.length; index++) {
+        cat[index] == filter
+    }
+   
+  }
+ console.log(filteredarray)
+ 
+ 
+  
+  // console.log("products:", products)
 
   return (
     <Productlist>
 
+    {/* <Filterf  products={products}/> */}
+    <div className="container1">
+      <div className="searchbox">
+		<div className="widthcontainter">
+		<div className="inputarea">
+			<input type="text" placeholder='search' />
+		</div>
+		<div className="searchbutton">
+			<button className='buttonP'>search</button>
+		</div>
+		</div>
+	  </div>
+	  <div className="filter">
+<div className="filterarea">
+	<select  name="categories" className='buttonP margin' onChange={handleFilter}>
+		{farray.map((items)=>{
+			return(
+			<option>{items}</option>
+			)
+		})}
+		
+	</select>
+	<select className='buttonP margin' name="category" id="">
+		<option disabled >sort products</option>
+		<option value="newest">newest</option>
+		<option value="">price</option>
+	</select>
+	<select className='buttonP margin' name="category" id="">
+		<option value="">electronic</option>
+		<option value="">fashion</option>
+		<option value="">breakfast</option>
+	</select>
+	<select className='buttonP margin' name="category" id="">
+		<option value="">electronic</option>
+		<option value="">fashion</option>
+		<option value="">breakfast</option>
+	</select>
+	</div>
+	</div>
+
+	
+	</div>
 
       <Container>
 
