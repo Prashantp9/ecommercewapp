@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import Rate from "./Rate";
 import { useEffect, useState, useContext} from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useDispatch, useSelector } from "react-redux"
-import { setProducts } from "../redux/actions/productActions"
 import notecontext from "../context/productcontext"
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 
 // const Container = styled.div`
@@ -32,7 +31,7 @@ const Image = styled.img`
  `;
 
 const Container = styled.div`
- margin: 4px;
+ margin: 4px ;
 `;
 
 const Info = styled.div`
@@ -59,14 +58,51 @@ const View = styled.div`
       cursor: pointer;
     }
     `
+    const Bottomline = styled.div`
+    display: flex;
+    justify-content: space-around;
+    ` 
 
-const ProductItems =() => {
-  // const products = useSelector((state)=> state.allProducts.products)
-  const context = useContext(notecontext);
-  const { fetchProduct, products }=context;
+const ProductItems =(props) => {
+
+  const cat = props.cat
+  const filter = props.filter.categories
+  
+  const initialproducts = []
+  const[products,setproducts] = useState(initialproducts)
+ 
+  const fetchProduct = async () => {
+    const response = await fetch(props.manage ? `http://localhost:5000/api/product?category=${filter}`:"http://localhost:5000/api/product/getproduct/6226fde26b0a988d54431a0e" , 
+    // "http://localhost:5000/api/product/getproduct/6226fde26b0a988d54431a0e"
+	{
+      // Default options are marked with *
+      method: "GET",
+      headers: {  
+        'Content-Type': 'application/json',
+        'auth-token':
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZmZGUyNmIwYTk4OGQ1NDQzMWEwZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0NjcyMjg2MX0.WAGcIIGXWoGeV05Z_QJfPRKk7t5VK39yOxcnEiThu0Y"
+
+      }
+
+
+    });
+    const json = await response.json()
+    setproducts(json)
+
+
+  }
+
+ 
+ 
+  // const context = useContext(notecontext);
+  // const { fetchProduct, products }=context;
   useEffect(()=>{
     fetchProduct();
-  },[])
+  },[cat])
+
+ 
+
+   
 
  
   
@@ -81,11 +117,15 @@ const ProductItems =() => {
           />
   
           <Info>
-           <p className="card-text">{title}</p>
-            <h5>{price}</h5>
+           <p className="card-text">{title.slice(0,12).toUpperCase()}</p>
+            <h5>₹{price}.00</h5>
+            <Bottomline>
             <View>
-        <Link to="/product" style={{textDecoration: "none",color: "white"}}><p>view product</p></Link>
-      </View> 
+        <Link to={`/product/${_id}`} style={{textDecoration: "none",color: "white"}}><p>view product</p></Link>
+       </View> 
+       <BookmarkIcon style={{"color": "rgb(204,3,30)"}}></BookmarkIcon>
+       
+       </Bottomline>
           
           </Info>
         </Card>
