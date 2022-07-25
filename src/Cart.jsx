@@ -1,4 +1,5 @@
 import { Add, Remove } from "@mui/icons-material";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import {mobile} from "./Responsive"
 
@@ -137,6 +138,13 @@ const SummaryItem = styled.div`
   font-size: ${(props) => props.type === "total" && "24px"};
 `;
 
+const Shippingd = styled.p`
+
+ font-size: 1rem;
+ color: red;
+ font-weight: 200;  
+ `
+
 const SummaryItemText = styled.span``;
 
 const SummaryItemPrice = styled.span``;
@@ -150,6 +158,10 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart=  useSelector(state=>state.cart)
+  console.log("cart 1",cart)
+  console.log(cart.products.img)
+ 
   return (
     <Container>
       <Wrapper>
@@ -164,15 +176,18 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://www.bigbasket.com/media/uploads/p/xxl/40196308_1-amul-tricone-choco-crunch-ice-cream.jpg" />
+         {cart.products.map(product=> console.log(product))}  
+        {cart.products.map(product=>
+          (
+               <Product>
+               <ProductDetail>
+                <Image src={product.img} />
                 <Details>
                   <ProductName>
-                    <b>Product:</b> amul ice cream
+                    <b>Product:</b> {product.title}
                   </ProductName>
                   <ProductId>
-                    <b>ID:</b> 93813718293
+                    <b>ID:</b>{product._id}
                   </ProductId>
                   <ProductColor color="black" />
                   <ProductSize>
@@ -183,56 +198,37 @@ const Cart = () => {
               <PriceDetail>
                 <ProductAmountContainer>
                   <Add />
-                  <ProductAmount>2</ProductAmount>
+                  <ProductAmount></ProductAmount>
                   <Remove />
                 </ProductAmountContainer>
-                <ProductPrice>Rs 30/-</ProductPrice>
+                <ProductPrice>₹{product.price}</ProductPrice>
               </PriceDetail>
-            </Product>
+              </Product>
+              ))}
+            
+
+           
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="http://masalakada.com/uploads/products/Quaker%20Oats.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> oats
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="gray" />
-                  <ProductSize>
-                   
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>Rs 90/-</ProductPrice>
-              </PriceDetail>
-            </Product>
+          
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+            <Shippingd>free shipping on order above 500/-</Shippingd>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>Rs 130/-</SummaryItemPrice>
+              <SummaryItemPrice>₹{cart.subtotal}.00</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>Rs 120/-</SummaryItemPrice>
+              <SummaryItemPrice>₹ 120.00</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>Rs 20/-</SummaryItemPrice>
+              <SummaryItemPrice>₹ 20.00</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>Rs 110/-</SummaryItemPrice>
+              <SummaryItemPrice>₹{cart.total}.00/-</SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>

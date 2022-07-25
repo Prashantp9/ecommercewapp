@@ -1,8 +1,12 @@
-import { createStore } from "redux";
-import reducer from "./reducer/index"
+import { configureStore } from "@reduxjs/toolkit";
+import cartReducer from "./cart"
+import filterReducer from "./filter"
+import addwhishlist from "./whishlist"
 
-const store = createStore( reducer,{},
-   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
-
-export default store;
+export default configureStore({
+     reducer:{
+         cart: cartReducer,
+         filter: filterReducer,
+         whishlist: addwhishlist
+     }
+})

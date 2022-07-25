@@ -31,8 +31,8 @@
     export const categories = [
       {
         id: 1,
-        img: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
-        title: "ICE CREAM!",
+        img: "https://m.media-amazon.com/images/I/719elVA3FvL._SX522_.jpg",
+        title: "Earphones",
       },
       {
         id: 2,
@@ -41,8 +41,8 @@
       },
       {
         id: 3,
-        img: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-        title: "FRUITS & VEGETABLES",
+        img: "https://images.unsplash.com/photo-1572495641004-28421ae52e52?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+        title: "Fashion",
       },
     ];
 
@@ -95,9 +95,9 @@
     export const products = [
       {
         id: 1,
-        img: "https://www.bigbasket.com/media/uploads/p/xxl/40196308_1-amul-tricone-choco-crunch-ice-cream.jpg",
-        title: "ice cream",
-        price: "Rs 300/-"
+        img: "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/main-b_600x.png?v=1625748090",
+        title: "Boat headphones",
+        price: 4000
       },
       {
         id: 2,
@@ -152,56 +152,29 @@
     export const PopularProducts = [
       {
         id: 1,
-        img: "https://rukminim1.flixcart.com/image/612/612/kvifekw0/antiseptic/e/6/3/1000-liquid-disinfectant-for-floor-cleaner-lavender-blossom-original-imag8e5qjzhxhrjq.jpeg?q=70",
-        title: "ice cream",
-        price: "Rs 300/-"
-      },
+        img: "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/main-b_600x.png?v=1625748090",
+        title: "Boat headphones",
+        price: 4000
+      },,
       {
         id: 2,
-        img: "http://masalakada.com/uploads/products/Quaker%20Oats.png",
-        title: "oats ",
-        price:"Rs 250/-"
+        img: "https://d2d22nphq0yz8t.cloudfront.net/88e6cc4b-eaa1-4053-af65-563d88ba8b26/https://media.croma.com/image/upload/v1619672492/Croma%20Assets/Imaging/Camera%20and%20Camcorders/Images/232967_whm5cw.png/mxw_2048,f_auto",
+        title: "camera",
+        price: 37500
       },
       {
         id: 3,
-        img: "https://rukminim1.flixcart.com/image/416/416/kuof5ow0/salt/r/u/d/superlite-iodized-salt-tata-original-imag7qyahuzns7n7.jpeg?q=70",
-        title: "aples",
-        price:" Rs 159/-"
+        img: "https://i.pinimg.com/474x/bb/f4/98/bbf4988cf5fafe110d8f2daa02d1abd8.jpg",
+        title: "tshirts",
+        price:500
       },
       {
         id: 4,
-        img: "https://rukminim1.flixcart.com/image/416/416/kdrpksw0/hair-oil/5/q/h/400-gold-coconut-hair-oil-parachute-advansed-original-imafuhh9qdgwrppm.jpeg?q=70",
+        img: "https://images-eu.ssl-images-amazon.com/images/I/41HSkMxLEJL._SX300_SY300_QL70_FMwebp_.jpg",
+        title: "OnePlus Nord CE 2 5G",
         price: "Rs 50/-"
       },
-      {
-        id: 5,
-        img: "https://rukminim1.flixcart.com/image/416/416/jhuvjww0/curd-yogurt/e/g/j/400-farm-fresh-milky-mist-original-imaf5sbnh3uzs4n8.jpeg?q=70",
-        title: "cleaner",
-        price: "Rs 50/-"
-      },
-      {
-        id: 4,
-        img: "https://www.bigbasket.com/media/uploads/p/xxl/1211909_1-bb-royal-basmati-rice-rozana-premium.jpg",
-        title: "basmatim rice 2x5 multpack",
-        price: "Rs 792/-"
-      },
-      {
-        id: 4,
-        img: "https://www.bigbasket.com/media/uploads/p/xxl/147491_8-saffola-gold-refined-cooking-oil-blended-rice-bran-sunflower-oil-helps-keeps-heart-healthy.jpg",
-        title: "safola 1L cooking oil ",
-        price: " Rs 195/-"
-      },
-      {
-        id: 4,
-        img: "https://rukminim1.flixcart.com/image/416/416/kh5607k0/pickle-murabba/w/v/h/500-na-plastic-bottle-pickle-umadi-original-imafx7szsxtwbzwx.jpeg?q=70",
-        price:  "Rs 1079/-"
-      },
-      {
-        id: 4,
-        img: "https://rukminim1.flixcart.com/image/416/416/kr58yvk0/vegetable/m/y/q/1-tomato-hybrid-red-un-branded-no-whole-original-imag5y68hauja4q3.jpeg?q=70",
-        title: "Safola 5L cooking oil ",
-        price:  "Rs 1079/-"
-      },
+      
     ];
 
 

@@ -11,7 +11,8 @@
     display: flex;
     height: 5vh;
     align-items: center;
-    background-color: #e5e5e5;
+    background-color: 
+#25063e ;
 
   `;
 
@@ -19,6 +20,7 @@
     ${mobile({
       height: "22px",width: "60%" , margin: "0 0 0 60px",
       })}
+    color: white;
     display: flex;
     height: 4vh;
     width: 30%;
@@ -48,7 +50,9 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-color: #${(props) => props.bg};
+    background-color: 
+#25063e ;
+color: grey;
   `;
 
   const ImgContainer = styled.div`
@@ -95,10 +99,10 @@
       <div>
         <Searchcontainer>
           <Inputcontainer>
-            <input type="text" className="navinput" style={{ width: " 100%" }} />
+            <input type="text" className="navinput" style={{color: "white",background: "unset" ,width: " 100%" }} />
             <Searchlogo>
             <SearchOutlinedIcon
-              style={{ color: "black", cursor: "pointer"}}
+              style={{  color: "white", cursor: "pointer"}}
               className="mx-1"
             />
             </Searchlogo>
@@ -109,11 +113,11 @@
           
               <Slide bg={"rgb(240,240,240)"}>
                 <ImgContainer>
-                  <Image src="https://images.unsplash.com/photo-1604742763104-86a0cf0aa1c2?ixlib=rb-1.2.1ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8auto=formatfit=cropw=2070q=80" />
+                  <Image src="https://images.unsplash.com/photo-1581591524425-c7e0978865fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" />
                 </ImgContainer>
                 <InfoContainer>
-                  <Title>Quick delivery</Title>
-                  <Desc>get quick delivery from the near by store at lowest prices from stormanger, shop and save on groceries and household items </Desc>
+                  <Title>camera</Title>
+                  <Desc>Digital Cameras from Top brands like Canon, Sony, Fujifilm, GoPro and Many more ! Buy Best Digital Cameras </Desc>
                   
                 </InfoContainer>
               </Slide>

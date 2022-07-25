@@ -16,7 +16,7 @@ import ProductState from "./context/productstate";
 
 
 function App() {
-  const [mode, setMode] = useState('light');
+  const [mode, setMode] = useState('dark');
 
 
   const togglemode = () => {
@@ -46,7 +46,7 @@ function App() {
          <Route path="/orders" element={<ProductsPage/>}/>
          <Route path="/signin" element={<Sign/>}/>
          <Route path="/register" element={<Register/>}/>
-         <Route path="/product" element={<Product/>}/>
+         <Route path="/product/:id" element={<Product/>}/>
 
        </Routes>
        <Footer/>

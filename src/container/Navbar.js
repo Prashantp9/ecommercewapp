@@ -6,6 +6,7 @@
     import styled from "styled-components"
     import StorefrontIcon from '@mui/icons-material/Storefront';
     import { Link } from 'react-router-dom';
+    import {useSelector} from "react-redux"
 
 
 
@@ -15,6 +16,12 @@
 
 
     function Navbar(props) {
+
+        const quantity = useSelector(state=>state.cart.quantity)
+        const count = useSelector(state=>state.whishlist.counter)
+
+
+        
 
         return (
             <>
@@ -34,10 +41,10 @@
                                     <input className="form-check-input" onClick={props.togglemode} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                                     <label id="modename" className="form-check-label" for="flexSwitchCheckDefault">Mode</label>
                                 </div>
-                                <Badge className='mx-2 badges' badgeContent={4} color="secondary">
+                                <Badge className='mx-2 badges' badgeContent={count} color="secondary">
                                    <Link to="/bookmark"> <BookmarkBorderOutlinedIcon color="white" /></Link>
                                 </Badge>
-                                <Badge className= "badges"badgeContent={3} color="secondary">
+                                <Badge className= "badges"badgeContent={quantity} color="secondary">
                                  <Link to="/cart"><ShoppingCartOutlinedIcon color="white" /></Link>
                                 </Badge>
                             </div>

@@ -27,8 +27,30 @@ const Productlist = styled.div`
 
 
 const ProductsPage = () => {
-  const context = useContext(notecontext);
-  const { fetchProduct, products }=context;
+//   const context = useContext(notecontext);
+  const initialproducts = [];
+  const [products,setProducts] = useState(initialproducts)
+//   const { fetchProduct, products }=context;/
+
+const fetchProduct = async () => {
+    const response = await fetch("http://localhost:5000/api/product/getproduct/6226fde26b0a988d54431a0e", 
+	{
+      // Default options are marked with *
+      method: "GET",
+      headers: {  
+        'Content-Type': 'application/json',
+        'auth-token':
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZmZGUyNmIwYTk4OGQ1NDQzMWEwZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0NjcyMjg2MX0.WAGcIIGXWoGeV05Z_QJfPRKk7t5VK39yOxcnEiThu0Y"
+
+      }
+
+
+    });
+    const json = await response.json()
+    setProducts(json)
+
+
+  }
   useEffect(() => {
     fetchProduct();
   }, [])
@@ -44,12 +66,15 @@ const ProductsPage = () => {
 		console.log(filter)
 		dispatch(filteredproduct({...filter}))
 	}   
-	
+	let handler = false;
 	const handleFilter = (e)=>{
+		handler = true
+		console.log(handler)
 		const value = e.target.value;
 		setfilter({
 			[e.target.name] : value,
 		})
+		
 	}
     
 	
@@ -72,15 +97,7 @@ const ProductsPage = () => {
     }
 	const farray = removeDuplicates(FCategories)
   //end
-  const filtered_array = products.filter(filteredarray)
- const filteredarray =(obj)=>{
-    const cat = obj.categories
-    for (let index = 0; index < cat.length; index++) {
-        cat[index] == filter
-    }
-   
-  }
- console.log(filteredarray)
+ 
  
  
   
@@ -135,7 +152,7 @@ const ProductsPage = () => {
       <Container>
 
 
-        <ProductItems products={products}/>
+        <ProductItems  manage={handler} cat={handleFilter}  filter ={filter} />
 
 
       </Container>

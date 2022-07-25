@@ -1,10 +1,15 @@
 import { Add, Remove } from "@mui/icons-material";
 import styled from "styled-components";
-import { useContext ,useEffect} from "react";
+import { useState, useContext ,useEffect} from "react";
 
 import {mobile} from "../Responsive"
 import notecontext from "../context/productcontext";
-
+import { useLocation } from "react-router-dom";
+import { addproduct } from "../Redux/cart";
+import { whishlistproduct } from "../Redux/whishlist"
+import { useDispatch } from "react-redux";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+ 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -61,7 +66,7 @@ const FilterTitle = styled.span`
   font-weight: 200;
 `;
 
-const FilterColor = styled.div`
+const Filtercolorm = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -70,12 +75,13 @@ const FilterColor = styled.div`
   cursor: pointer;
 `;
 
-const FilterSize = styled.select`
-  margin-left: 10px;
-  padding: 5px;
+const FilterSize = styled.div`
+  margin-left: 17px;
+  padding: 9px;
 `;
 
-const FilterSizeOption = styled.option``;
+const FilterSizeOption = styled.option`
+ `;
 
 const AddContainer = styled.div`
   width: 50%;
@@ -113,52 +119,115 @@ const Button = styled.button`
   }
 `;
 
+
+
 const Product = () => {
-    const context = useContext(notecontext)
-    const { products ,selectedproduct }= context;
-    useEffect(() => {
-      selectedproduct()
-    }, [])
-    console.log(products)
+  let counta = 0 ;
+  const addwhishlist = ()=>{
+    // setcount(count + 1)
+    counta =+ 1
+    dispatch(whishlistproduct({...product,counta}))
+  }
+  
+  
+  
+  
+  const dispatch = useDispatch()
+  
+  const [product, setproduct] = useState({})
+  const [productquantity, setquantity] = useState(0)
+  
+  
+  // const context = useContext(notecontext)
+  // const { products ,selectedproduct }= context;
+  // useEffect(() => {
+    //   selectedproduct()
+    // }, [])
+    // console.log(products)
+    console.log(product)
+
+    const Location = useLocation()
+    const id = Location.pathname.split("/")[2]
+
+    useEffect(()=>{
+      const selectedproduct = async ()=>{
+        const response = await fetch(`http://localhost:5000/api/product/selectedproduct/${id}`, {
+          // Default options are marked with *
+          method: "GET",
+          headers: {  
+            'Content-Type': 'application/json',
+            'auth-token':
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZmZGUyNmIwYTk4OGQ1NDQzMWEwZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0NjcyMjg2MX0.WAGcIIGXWoGeV05Z_QJfPRKk7t5VK39yOxcnEiThu0Y"
+    
+          }
+    
+    
+        });
+        const json = await response.json()
+        setproduct(json)
+      }
+      selectedproduct();
+    },[id])
+
+    const handlequantity = (type) =>{
+           if(type === "dec"){
+             setquantity(productquantity-1)
+           }
+           else if(type === "inc"){
+             setquantity(productquantity+1)
+           }
+    }
+
+    
+    const handlecart = ()=>{
+      dispatch(addproduct({ ...product , productquantity }))
+    }
+
+   
     
 
   return (
     <Container>
       <Wrapper>
         <ImgContainer>
-          <Image src={products.img} />
+          <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>{products.title}</Title>
+          <Title>{product.title}</Title>
           <Desc>
-             {products.description}
+             {product.description}
           </Desc>
-          <Price>{products.price}</Price>
+          <Price>{product.price}</Price>
           <FilterContainer>
-            <Filter>
+            {/* <Filter>
               <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
-            </Filter>
+              {product.color.map((c)=>{
+                <Filtercolorm color={c}></Filtercolorm>
+              })
+              }
+               
+            
+            </Filter> */}
+            
             <Filter>
-              <FilterTitle>Size</FilterTitle>
+              {/* <FilterTitle>Size</FilterTitle>
               <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
-              </FilterSize>
+                {product.size.map((s)=>{
+                  <FilterSizeOption>{s}</FilterSizeOption>
+                })}
+              </FilterSize> */}
+              
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove onClick={()=> handlequantity("dec")} />
+              <Amount>{productquantity}</Amount>
+              <Add  onClick={()=> handlequantity("inc")}/>
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handlecart}>ADD TO CART</Button>
+            <BookmarkIcon onClick={addwhishlist} id="bookmark" style={{"height": "3rem","width":"3rem"}}
+             ></BookmarkIcon>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

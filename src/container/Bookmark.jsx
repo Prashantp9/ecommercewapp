@@ -1,6 +1,7 @@
 import { Add, Remove } from "@mui/icons-material";
 import styled from "styled-components";
 import {mobile} from "../Responsive"
+import { useSelector } from "react-redux";
 
 const Container = styled.div``;
 
@@ -150,6 +151,9 @@ const Button = styled.button`
 `;
 
 const BookMark = () => {
+   const whishlist = useSelector(state=>state.whishlist)
+   console.log(whishlist.counter)
+  const products = whishlist.products
   return (
     <Container>
       <Wrapper>
@@ -162,15 +166,18 @@ const BookMark = () => {
         </Top>
         <Bottom>
           <Info>
+            {products.map( items=>(
+            
+
             <Product>
               <ProductDetail>
-                <Image src="https://www.bigbasket.com/media/uploads/p/xxl/40196308_1-amul-tricone-choco-crunch-ice-cream.jpg" />
+                <Image src={items.img} />
                 <Details>
                   <ProductName>
-                    <b>Product:</b> JESSIE THUNDER SHOES
+                    <b>Product:</b> {items.title}
                   </ProductName>
                   <ProductId>
-                    <b>ID:</b> 93813718293
+                    <b>ID:</b> {items._id}
                   </ProductId>
                   <ProductSize>
                    
@@ -178,40 +185,12 @@ const BookMark = () => {
                 </Details>
               </ProductDetail>
               <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>Rs 30/-</ProductPrice>
+               <ProductPrice>Rs{items.price}.00 </ProductPrice>
               </PriceDetail>
             </Product>
+            ))}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="http://masalakada.com/uploads/products/Quaker%20Oats.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> oats
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="gray" />
-                  <ProductSize>
-                   
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>Rs 90/-</ProductPrice>
-              </PriceDetail>
-            </Product>
+           
           </Info>
          
         </Bottom>
